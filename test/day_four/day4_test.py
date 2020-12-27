@@ -171,3 +171,20 @@ def test_hgt_without_value_is_invalid():
     is_valid = validator.validate_hgt('cmd')
     assert is_valid == False
 
+
+# hcl
+def test_hcl_pound_six_chars_numbers_letters_is_valid():
+    is_valid = validator.validate_hcl('#123abc')
+    assert is_valid == True
+
+
+def test_hcl_without_is_invalid():
+    is_valid = validator.validate_hcl('123abc')
+    assert is_valid == False
+
+
+def test_hcl_without_required_number_of_chars_is_invalid():
+    is_valid = validator.validate_hcl('#123ab')
+    assert is_valid == False
+
+

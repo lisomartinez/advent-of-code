@@ -73,3 +73,9 @@ def validate_hgt(param):
         return True if 193 >= value >= 150 else False
     elif unit == 'in':
         return True if 76 >= value >= 59 else False
+
+
+def validate_hcl(param):
+    has_length = len(param) == 7
+    has_format = re.match('^#[0-9]*[a-z]*', param)
+    return True if has_length and has_format is not None else False
