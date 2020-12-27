@@ -60,6 +60,7 @@ def test_report_valid_passwords_short_list():
     valid_passwords = validator.report_valid_passwords(passwords)
     assert valid_passwords == 2
 
+
 def test_report_valid_passwords():
     passwords = get_test_data()
     valid_passwords = validator.report_valid_passwords(passwords)
