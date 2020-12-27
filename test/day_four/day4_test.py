@@ -187,4 +187,39 @@ def test_hcl_without_required_number_of_chars_is_invalid():
     is_valid = validator.validate_hcl('#123ab')
     assert is_valid == False
 
+# ecl
 
+def test_ecl_with_value_amb_is_valid():
+    is_valid = validator.validate_ecl('amb')
+    assert is_valid == True
+
+def test_with_other_value_is_invalid():
+    is_valid = validator.validate_ecl('aaa')
+    assert  is_valid == False
+
+def test_ecl_with_value_blu_is_valid():
+    is_valid = validator.validate_ecl('blu')
+    assert is_valid == True
+#
+def test_ecl_with_value_brn_is_valid():
+    is_valid = validator.validate_ecl('brn')
+    assert is_valid == True
+
+
+def test_ecl_with_value_gry_is_valid():
+    is_valid = validator.validate_ecl('gry')
+    assert is_valid == True
+
+def test_ecl_with_value_grn_is_valid():
+    is_valid = validator.validate_ecl('grn')
+    assert is_valid == True
+
+
+def test_ecl_with_value_hzl_is_valid():
+    is_valid = validator.validate_ecl('hzl')
+    assert is_valid == True
+
+
+def test_ecl_with_value_oth_is_valid():
+    is_valid = validator.validate_ecl('oth')
+    assert is_valid == True

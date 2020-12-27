@@ -79,3 +79,8 @@ def validate_hcl(param):
     has_length = len(param) == 7
     has_format = re.match('^#[0-9]*[a-z]*', param)
     return True if has_length and has_format is not None else False
+
+
+def validate_ecl(param):
+    values = {'amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth'}
+    return True if param in values else False
