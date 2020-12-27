@@ -12,7 +12,7 @@ fields_key = {
 }
 
 
-def is_password_valid(password):
+def are_required_params_present(password):
     fields = re.split(r"[\s\n]", password)
     fields_present = 0
     is_cid_missing = 1
@@ -33,6 +33,43 @@ def report_valid_passwords(passwords):
     list_of_passwords = split_lines(passwords)
     num_of_valid_passwords = 0
     for password in list_of_passwords:
-        if is_password_valid(password):
+        if are_required_params_present(password):
             num_of_valid_passwords += 1
     return num_of_valid_passwords
+
+
+def validate_byr(param):
+    try:
+        year = int(param)
+        return True if 2002 >= year >= 1920 else False
+    except ValueError:
+        return False
+
+
+def validate_iyr(param):
+    try:
+        year = int(param)
+        return True if 2020 >= year >= 2010 else False
+    except ValueError:
+        return False
+
+
+def validate_eyr(param):
+    try:
+        year = int(param)
+        return True if 2030 >= year >= 2020 else False
+    except ValueError:
+        return False
+
+
+def validate_hgt(param):
+    has_valid_format = re.match('[0-9]*(cm$|in$)', param)
+    if has_valid_format is None:
+        return False
+
+    unit = param[-2:]
+    value = int(param[:-2])
+    if unit == 'cm':
+        return True if 193 >= value >= 150 else False
+    elif unit == 'in':
+        return True if 76 >= value >= 59 else False
