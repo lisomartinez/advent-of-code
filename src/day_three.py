@@ -10,14 +10,14 @@ def is_open_square(world_map, row, col):
     return world_map[row][col] == '.'
 
 
-def count_total_trees_in_slope(world_map, x_start, y_start) -> int:
-    col = x_start
-    row = y_start
+def count_total_trees_in_slope(world_map, x, y) -> int:
+    col = x
+    row = y
     num_of_trees = 0
     while row < len(world_map):
         is_open = is_open_square(world_map, row, col)
         if is_open is False:
             num_of_trees += 1
-        col = col + 3
-        row = row + 1
+        col = col + x
+        row = row + y
     return num_of_trees

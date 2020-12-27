@@ -21,6 +21,12 @@ def test_square_duplicate_original_line_row_is_col_is_greater_than_line():
 
 
 def test_count_total_trees_with_small_map():
+    world_map = create_small_map()
+    total_trees = count_total_trees_in_slope(world_map, 3, 1)
+    assert total_trees == 7
+
+
+def create_small_map():
     world_map = ["..##.......",
                  "#...#...#..",
                  ".#....#..#.",
@@ -32,11 +38,58 @@ def test_count_total_trees_with_small_map():
                  "#.##...#...",
                  "#...##....#",
                  ".#..#...#.#"]
-    total_trees = count_total_trees_in_slope(world_map, 3, 1)
-    assert total_trees == 7
+    return world_map
 
 
 def test_count_total_trees():
     world_map = get_test_data()
     total_trees = count_total_trees_in_slope(world_map, 3, 1)
     assert total_trees == 228
+
+
+def test_slope_1_1_with_small_map():
+    world_map = create_small_map()
+    total_trees = count_total_trees_in_slope(world_map, 1, 1)
+    assert total_trees == 2
+
+
+def test_slope_5_1_with_small_map():
+    world_map = create_small_map()
+    total_trees = count_total_trees_in_slope(world_map, 5, 1)
+    assert total_trees == 3
+
+
+def test_slope_7_1_with_small_map():
+    world_map = create_small_map()
+    total_trees = count_total_trees_in_slope(world_map, 7, 1)
+    assert total_trees == 4
+
+
+def test_slope_1_2_with_small_map():
+    world_map = create_small_map()
+    total_trees = count_total_trees_in_slope(world_map, 1, 2)
+    assert total_trees == 2
+
+
+def test_slope_1_1():
+    world_map = get_test_data()
+    total_trees = count_total_trees_in_slope(world_map, 1, 1)
+    assert total_trees == 84
+
+
+def test_slope_5_1():
+    world_map = get_test_data()
+    total_trees = count_total_trees_in_slope(world_map, 5, 1)
+    assert total_trees == 89
+
+
+def test_slope_7_1():
+    world_map = get_test_data()
+    total_trees = count_total_trees_in_slope(world_map, 7, 1)
+    assert total_trees == 100
+
+
+def test_slope_1_2():
+    world_map = get_test_data()
+    total_trees = count_total_trees_in_slope(world_map, 1, 2)
+    assert total_trees == 40
