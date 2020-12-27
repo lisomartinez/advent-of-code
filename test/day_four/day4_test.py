@@ -187,19 +187,24 @@ def test_hcl_without_required_number_of_chars_is_invalid():
     is_valid = validator.validate_hcl('#123ab')
     assert is_valid == False
 
+
 # ecl
 
 def test_ecl_with_value_amb_is_valid():
     is_valid = validator.validate_ecl('amb')
     assert is_valid == True
 
+
 def test_with_other_value_is_invalid():
     is_valid = validator.validate_ecl('aaa')
-    assert  is_valid == False
+    assert is_valid == False
+
 
 def test_ecl_with_value_blu_is_valid():
     is_valid = validator.validate_ecl('blu')
     assert is_valid == True
+
+
 #
 def test_ecl_with_value_brn_is_valid():
     is_valid = validator.validate_ecl('brn')
@@ -209,6 +214,7 @@ def test_ecl_with_value_brn_is_valid():
 def test_ecl_with_value_gry_is_valid():
     is_valid = validator.validate_ecl('gry')
     assert is_valid == True
+
 
 def test_ecl_with_value_grn_is_valid():
     is_valid = validator.validate_ecl('grn')
@@ -223,3 +229,64 @@ def test_ecl_with_value_hzl_is_valid():
 def test_ecl_with_value_oth_is_valid():
     is_valid = validator.validate_ecl('oth')
     assert is_valid == True
+
+
+# pid
+def test_pid_with_leasing_zeros_and_numbers_from_1_to_9_is_valid():
+    is_valid = validator.validate_pid('012345678')
+    assert is_valid == True
+
+
+def test_pid_with_all_zeros_is_valid():
+    is_valid = validator.validate_pid('000000000')
+    assert is_valid == True
+
+
+def test_pid_without_required_length_is_invalid():
+    is_valid = validator.validate_pid('01234567')
+    assert is_valid == False
+
+
+def test_pid_with_required_len_and_with_other_chars_is_invalid():
+    is_valid = validator.validate_pid('01234567a')
+    assert is_valid == False
+
+
+def test_count_invalid_passwords_with_validations():
+    passwords = '''eyr:1972 cid:100
+hcl:#18171d ecl:amb hgt:170 pid:186cm iyr:2018 byr:1926
+
+iyr:2019
+hcl:#602927 eyr:1967 hgt:170cm
+ecl:grn pid:012533040 byr:1946
+
+hcl:dab227 iyr:2012
+ecl:brn hgt:182cm pid:021572410 eyr:2020 byr:1992 cid:277
+
+hgt:59cm ecl:zzz
+eyr:2038 hcl:74454a iyr:2023
+pid:3556412378 byr:2007'''
+    num_of_valid_passwords = validator.report_valid_passwords_with_validations(passwords)
+    assert num_of_valid_passwords == 0
+
+
+def test_count_valid_passwords_with_validations():
+    passwords = '''pid:087499704 hgt:74in ecl:grn iyr:2012 eyr:2030 byr:1980
+hcl:#623a2f
+
+eyr:2029 ecl:blu cid:129 byr:1989
+iyr:2014 pid:896056539 hcl:#a97842 hgt:165cm
+
+hcl:#888785
+hgt:164cm byr:2001 iyr:2015 cid:88
+pid:545766238 ecl:hzl
+eyr:2022
+
+iyr:2010 hgt:158cm hcl:#b6652a ecl:blu byr:1944 eyr:2021 pid:093154719'''
+    num_of_valid_passwords = validator.report_valid_passwords_with_validations(passwords)
+    assert num_of_valid_passwords == 4
+
+
+def test_report_valid_passwords_with_validations():
+    num_of_valid_passwords = validator.report_valid_passwords_with_validations(get_test_data())
+    assert num_of_valid_passwords == 111
