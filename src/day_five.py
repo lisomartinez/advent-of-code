@@ -1,3 +1,6 @@
+from typing import Set
+
+
 def mid_of_range(lower_half, upper_half):
     return lower_half + (upper_half - lower_half) // 2
 
@@ -41,3 +44,34 @@ def find_max_seat_id(seats):
             max_id = seat_id
     return max_id
 
+
+def find_misssing_seat_id(seats):
+    seat_id_set: Set = set()
+    min_id = -1
+    max_id = 1
+    for seat in seats:
+        seat_id = find_seat_id(seat)
+        seat_id_set.add(seat_id)
+        min_id = set_min_id(min_id, seat_id)
+        max_id = set_max_id(max_id, seat_id)
+    return find_missing_in_expected_range(max_id, min_id, seat_id_set)
+
+
+def find_missing_in_expected_range(max_id, min_id, seat_id_set):
+    missing = 0
+    for sid in range(min_id, max_id + 1):
+        if sid not in seat_id_set:
+            missing = sid
+    return missing
+
+
+def set_max_id(max_id, seat_id):
+    if seat_id > 1 and seat_id > max_id:
+        max_id = seat_id
+    return max_id
+
+
+def set_min_id(min_id, seat_id):
+    if seat_id == -1 or seat_id < min_id:
+        min_id = seat_id
+    return min_id

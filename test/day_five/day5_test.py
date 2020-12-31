@@ -127,3 +127,8 @@ def test_find_max_seat_id_from_test_data():
     seats = get_test_data()
     max_id = seat_finder.find_max_seat_id(seats)
     assert max_id == 922
+
+def test_list_of_seats_id():
+    seats = get_test_data()
+    missing_seat_id = seat_finder.find_misssing_seat_id(seats)
+    assert missing_seat_id == 747
